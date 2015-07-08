@@ -23,7 +23,7 @@ public class GameInstance : MonoBehaviour
         menuInstance.OpenListMenu();
         if (!AndroidWrapper.I.IsAuthorizationSuccess())
         {
-            WriteError("Вероятно, у вас не установлен VK клиент. Установите его и попробуйте снова");
+            WriteError(AndroidWrapper.I.GetJaveExeption());
         }
     }
 

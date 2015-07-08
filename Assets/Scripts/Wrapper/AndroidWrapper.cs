@@ -51,6 +51,11 @@ namespace VKSdkAndroidWrapper
         #endregion
         #region ISocialWrapper
 
+        public string GetJaveExeption()
+        {
+            return activityInstance.Get<string>("exeptionMessage");
+        }
+
         public bool IsAuthorizationSuccess()
         {
             if (activityInstance != null)
