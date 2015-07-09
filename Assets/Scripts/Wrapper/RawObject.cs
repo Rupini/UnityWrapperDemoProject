@@ -20,6 +20,9 @@ namespace VKSdkAndroidWrapper
                 object value = null;
                 switch (GetFielsTypes()[i])
                 {
+                    case FieldType.Bool:
+                        value = jo.Get<bool>(fieldName);
+                        break;
                     case FieldType.Int:
                         value = jo.Get<int>(fieldName);
                         break;
@@ -37,7 +40,7 @@ namespace VKSdkAndroidWrapper
                 i++;
             }
         }
-        
+
         public RawObject(Dictionary<string, object> fields)
         {
             this.fields = fields;

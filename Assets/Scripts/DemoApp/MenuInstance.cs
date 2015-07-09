@@ -5,6 +5,7 @@ using System.Text;
 using UnityEngine;
 using VKSdkAndroidWrapper;
 using UnityEngine.UI;
+using System.Collections;
 
 public class MenuInstance : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class MenuInstance : MonoBehaviour
 
     public GameObject shareMenu;
 
+    public Image profilePhoto;
     public Text fullNameText;
     public Text idText;
     public Text inputText;
@@ -40,7 +42,7 @@ public class MenuInstance : MonoBehaviour
 
     private void Start()
     {
-        if (AndroidWrapper.I.IsAuthorizationSuccess())
+        if (AndroidWrapper.IsAuthorizationSuccess())
             headerText.text = "Token = " + AndroidWrapper.I.GetToken() + " ID = " + AndroidWrapper.I.GetAppID();
         else
             startButton.gameObject.SetActive(false);
@@ -74,7 +76,7 @@ public class MenuInstance : MonoBehaviour
 
     public void LoadingFriends()
     {
-        AndroidWrapper.I.RequestUserList("id,first_name,last_name", OnUserListRecieved);
+        AndroidWrapper.I.RequestUserList("id,first_name,last_name,photo_200", OnUserListRecieved);
         startButton.gameObject.SetActive(false);
     }
 
@@ -87,11 +89,20 @@ public class MenuInstance : MonoBehaviour
     public void OpenShareMenu(User user)
     {
         selectedUserID = user.ID;
+        StartCoroutine(LoadShareMenu(user));
+    }
+
+    private IEnumerator LoadShareMenu(User user)
+    {
+
+        WWW www = new WWW(user.ProfilePhotoUrl);
+        yield return www;
+
+        profilePhoto.sprite = Sprite.Create(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2());
         shareMenu.SetActive(true);
         listMenu.SetActive(false);
         fullNameText.text = user.FullName;
         idText.text = user.ID.ToString();
-        inputText.text = "";
     }
 
     public void Share()

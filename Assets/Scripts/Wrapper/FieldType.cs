@@ -8,9 +8,10 @@ namespace VKSdkAndroidWrapper
     public enum FieldType : byte
     {
         Unknown = 0,
-        Int = 1,
-        Float = 2,
-        String = 3,
-        Object = 4
+        Bool = 1,
+        Int = 2,
+        Float = 3,
+        String = 4,
+        Object = 5
     }
 }

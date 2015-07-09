@@ -6,14 +6,15 @@ namespace VKSdkAndroidWrapper
     public class User : RawObject
     {
         #region Static
-        private static string[] fieldNames = { "id", "fullName", "profilePhotoUrl" };
-        private static FieldType[] fieldTypes = { FieldType.Int, FieldType.String, FieldType.String };
+        private static string[] fieldNames = { "id", "fullName", "profilePhotoUrl", "isDisabled" };
+        private static FieldType[] fieldTypes = { FieldType.Int, FieldType.String, FieldType.String, FieldType.Bool };
         #endregion
         #region Definiton
         private int id = -1;
         private string fullName;
         private string profilePhotoUrl;
-        
+        private bool? isDisabled;
+
         protected override string[] GetFieldNames()
         {
             return fieldNames;
@@ -35,7 +36,7 @@ namespace VKSdkAndroidWrapper
         {
             get
             {
-                if (id == -1) id = Convert.ToInt32(fields["id"].ToString());
+                if (id == -1) id = (int)fields["id"];
                 return id;
             }
         }
@@ -55,6 +56,15 @@ namespace VKSdkAndroidWrapper
             {
                 if (profilePhotoUrl == null) profilePhotoUrl = fields["profilePhotoUrl"].ToString();
                 return profilePhotoUrl;
+            }
+        }
+
+        public bool IsDisabled
+        {
+            get
+            {
+                if (isDisabled == null) isDisabled = (bool)fields["isDisabled"];
+                return isDisabled.Value;
             }
         }
         #endregion

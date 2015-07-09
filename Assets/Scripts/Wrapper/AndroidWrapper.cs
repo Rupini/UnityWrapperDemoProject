@@ -56,10 +56,10 @@ namespace VKSdkAndroidWrapper
             return activityInstance.Get<string>("exeptionMessage");
         }
 
-        public bool IsAuthorizationSuccess()
+        public static bool IsAuthorizationSuccess()
         {
-            if (activityInstance != null)
-                return activityInstance.Call<bool>("isAuthorizationSuccess");
+            if (instance != null)
+                return instance.activityInstance.Call<bool>("isAuthorizationSuccess");
             else
                 return false;
         }

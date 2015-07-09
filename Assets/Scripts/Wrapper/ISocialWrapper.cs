@@ -7,8 +7,6 @@ namespace VKSdkAndroidWrapper
 {
     public interface ISocialWrapper
     {
-        bool IsAuthorizationSuccess();
-
         string GetToken();
 
         string GetAppID();

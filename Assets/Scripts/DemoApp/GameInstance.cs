@@ -5,6 +5,7 @@ using System.Text;
 using UnityEngine;
 using VKSdkAndroidWrapper;
 using UnityEngine.UI;
+using System.Collections;
 
 public class GameInstance : MonoBehaviour
 {
@@ -21,10 +22,8 @@ public class GameInstance : MonoBehaviour
         instance = this;
         AndroidWrapper.Initialize();
         menuInstance.OpenListMenu();
-        if (!AndroidWrapper.I.IsAuthorizationSuccess())
-        {
+        if (!AndroidWrapper.IsAuthorizationSuccess())
             WriteError(AndroidWrapper.I.GetJaveExeption());
-        }
     }
 
     public void WriteError(string errorMessage)
